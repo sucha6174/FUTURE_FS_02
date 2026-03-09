@@ -52,3 +52,20 @@ app.post("/leads", async (req, res) => {
   }
 
 })
+
+// Get all leads
+app.get("/leads", async (req, res) => {
+
+  try {
+
+    const leads = await Lead.find()
+
+    res.json(leads)
+
+  } catch (error) {
+
+    res.status(500).json({ error: "Error fetching leads" })
+
+  }
+
+})
