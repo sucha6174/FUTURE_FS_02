@@ -69,3 +69,27 @@ app.get("/leads", async (req, res) => {
   }
 
 })
+
+// Update lead status
+app.put("/leads/:id", async (req, res) => {
+
+  try {
+
+    const updatedLead = await Lead.findByIdAndUpdate(
+      req.params.id,
+      { status: req.body.status },
+      { new: true }
+    )
+
+    res.json({
+      message: "Lead status updated",
+      updatedLead
+    })
+
+  } catch (error) {
+
+    res.status(500).json({ error: "Error updating lead" })
+
+  }
+
+})
