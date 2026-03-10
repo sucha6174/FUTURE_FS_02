@@ -23,9 +23,7 @@ app.get("/", (req,res)=>{
   res.send("CRM Server Running")
 })
 
-app.listen(5000, ()=>{
-  console.log("Server running on port 5000")
-})
+
 
 // Add new lead
 app.post("/leads", async (req, res) => {
@@ -92,4 +90,24 @@ app.put("/leads/:id", async (req, res) => {
 
   }
 
+})
+// Delete lead
+app.delete("/leads/:id", async (req, res) => {
+
+  try {
+
+    await Lead.findByIdAndDelete(req.params.id)
+
+    res.json({ message: "Lead deleted" })
+
+  } catch (error) {
+
+    res.status(500).json({ error: "Error deleting lead" })
+
+  }
+
+})
+
+app.listen(5000, ()=>{
+  console.log("Server running on port 5000")
 })
