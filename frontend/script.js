@@ -12,11 +12,16 @@ list.innerHTML = ""
 
 leads.forEach(lead => {
 
-const li = document.createElement("li")
+const row = document.createElement("tr")
 
-li.textContent = lead.name + " - " + lead.status
+row.innerHTML = `
+<td>${lead.name}</td>
+<td>${lead.email}</td>
+<td>${lead.source}</td>
+<td>${lead.status}</td>
+`
 
-list.appendChild(li)
+list.appendChild(row)
 
 })
 
