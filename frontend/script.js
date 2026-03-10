@@ -18,7 +18,13 @@ row.innerHTML = `
 <td>${lead.name}</td>
 <td>${lead.email}</td>
 <td>${lead.source}</td>
-<td>${lead.status}</td>
+<td>
+<select onchange="updateStatus('${lead._id}', this.value)">
+<option value="new" ${lead.status === "new" ? "selected" : ""}>New</option>
+<option value="contacted" ${lead.status === "contacted" ? "selected" : ""}>Contacted</option>
+<option value="converted" ${lead.status === "converted" ? "selected" : ""}>Converted</option>
+</select>
+</td>
 `
 
 list.appendChild(row)
@@ -46,3 +52,17 @@ loadLeads()
 }
 
 loadLeads()
+
+async function updateStatus(id,status){
+
+await fetch(API + "/leads/" + id,{
+method:"PUT",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({status})
+})
+
+loadLeads()
+
+}
