@@ -25,6 +25,10 @@ row.innerHTML = `
 <option value="converted" ${lead.status === "converted" ? "selected" : ""}>Converted</option>
 </select>
 </td>
+
+<td>
+<button onclick="deleteLead('${lead._id}')">Delete</button>
+</td>
 `
 
 list.appendChild(row)
@@ -67,6 +71,18 @@ headers:{
 "Content-Type":"application/json"
 },
 body:JSON.stringify({status})
+})
+
+loadLeads()
+
+}
+
+async function deleteLead(id){
+
+if(!confirm("Are you sure you want to delete this lead?")) return
+
+await fetch(API + "/leads/" + id,{
+method:"DELETE"
 })
 
 loadLeads()
