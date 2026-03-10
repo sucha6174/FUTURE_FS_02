@@ -47,9 +47,15 @@ headers:{
 body:JSON.stringify({name,email,source})
 })
 
+// clear input fields after adding lead
+document.getElementById("name").value=""
+document.getElementById("email").value=""
+document.getElementById("source").value=""
+
 loadLeads()
 
 }
+
 
 loadLeads()
 
